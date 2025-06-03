@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison De Haute | 메종 드 오뜨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Serif+KR:wght@400;700&family=Dancing+Script&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Noto Serif KR', serif;
+      background-color: #121212;
+      color: #e6e6e6;
+    }
+    h1, h2, h3, .brand-name {
+      font-family: 'Playfair Display', serif;
+      color: #f5f5f5;
+    }
+    .highlight {
+      color: #c5a46d;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .fade-in-up {
+      opacity: 0;
+      animation: fadeInUp 1.2s ease-out forwards;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .delay-100 { animation-delay: 0.3s; }
+    .delay-200 { animation-delay: 0.6s; }
+    .delay-300 { animation-delay: 0.9s; }
+    /* hover 시 애니메이션 재실행용 */
+    .fade-in.re-animate {
+      animation: none;
+      opacity: 1;
+    }
+    .fade-in-up.re-animate {
+      animation: none;
+      opacity: 1;
+    }
+    /* Trust Card Animation */
+    .trust-card {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUpTrust 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+      transition: box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  scale 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    @keyframes fadeInUpTrust {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .trust-delay-100 { animation-delay: 0.3s; }
+    .trust-delay-200 { animation-delay: 0.6s; }
+    .trust-delay-300 { animation-delay: 0.9s; }
+    .trust-card:hover, .trust-card.group:hover {
+      transform: translateY(-12px) scale(1.035);
+      box-shadow: 0 12px 32px 0 rgba(197, 164, 109, 0.18), 0 2px 8px 0 rgba(0,0,0,0.18), 0 0 24px 0 rgba(255,255,255,0.08);
+      z-index: 2;
+    }
+    @keyframes fadeInHero {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeInHero 1.1s cubic-bezier(0.22,0.61,0.36,1) forwards;
+    }
+  </style>
+</head>
+<body>
+  <header class="fixed top-0 left-0 w-full z-50 bg-[#121212] border-b border-gray-800">
+    <div class="max-w-screen-xl mx-auto flex items-center justify-between px-4 py-3">
+      <!-- 로고 & 브랜드명 -->
+      <a href="#" id="header-logo-scroll-top" class="flex items-end group">
+        <img src="public/assets/logo/logo.png" alt="Maison De Haute 로고" class="w-20 h-auto align-bottom drop-shadow-[0_2px_16px_rgba(255,255,255,0.7)]" />
+        <span class="relative -top-[13px] -ml-[13px] font-['Playfair_Display'] text-xl md:text-2xl font-bold text-[#c9a56d] group-hover:text-[#c9a56d] transition">
+          Maison De Haute
+        </span>
+      </a>
+      <!-- 내비게이션 -->
+      <nav class="hidden md:flex gap-8">
+        <a href="#brand" class="nav-scroll text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Brand</a>
+        <a href="#trust-system" class="nav-scroll text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Trust System</a>
+        <a href="#brands" class="nav-scroll text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Brands</a>
+        <a href="#journal" class="nav-scroll text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Journal</a>
+        <a href="#showroom" class="nav-scroll text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Showroom</a>
+        <a href="#contact" class="nav-scroll text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Contact</a>
+      </nav>
+      <!-- 햄버거 메뉴 (모바일) -->
+      <div class="md:hidden">
+        <button id="mobile-menu-btn" class="text-[#c9a56d] text-3xl" aria-label="메뉴 열기">☰</button>
+      </div>
+    </div>
+    <!-- 모바일 메뉴 -->
+    <div id="mobile-menu" class="hidden absolute top-full right-4 mt-2 bg-[#181818] border border-gray-700 rounded-lg shadow-lg flex-col z-50 min-w-[160px]">
+      <a href="#brand" class="nav-scroll px-6 py-3 text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Brand</a>
+      <a href="#trust-system" class="nav-scroll px-6 py-3 text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Trust System</a>
+      <a href="#brands" class="nav-scroll px-6 py-3 text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Brands</a>
+      <a href="#journal" class="nav-scroll px-6 py-3 text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Journal</a>
+      <a href="#showroom" class="nav-scroll px-6 py-3 text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Showroom</a>
+      <a href="#contact" class="nav-scroll px-6 py-3 text-[#d6d6d6] hover:text-[#c9a56d] font-['Noto_Serif_KR'] transition">Contact</a>
+    </div>
+  </header>
+  <script>
+    // 모바일 메뉴 토글
+    document.getElementById('mobile-menu-btn').onclick = function() {
+      var menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    };
+    // 부드러운 커스텀 스크롤
+    document.querySelectorAll('a.nav-scroll').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+            const startY = window.scrollY;
+            const diff = y - startY;
+            let start;
+            function step(timestamp) {
+              if (!start) start = timestamp;
+              const progress = Math.min((timestamp - start) / 900, 1);
+              window.scrollTo(0, startY + diff * easeInOutCubic(progress));
+              if (progress < 1) requestAnimationFrame(step);
+            }
+            function easeInOutCubic(t) {
+              return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
+            requestAnimationFrame(step);
+          }
+        }
+      });
+    });
+    // 헤더 로고 클릭 시 최상단 부드럽게 이동
+    document.getElementById('header-logo-scroll-top')?.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+  <main class="pt-[80px] pb-[60px]">
+    <div class="max-w-screen-xl mx-auto">
+
+<!-- Hero Section -->
+<section id="brand" class="text-center py-12 px-6 bg-[#121212] scroll-mt-[100px]">
+  <!-- 브랜드 로고 -->
+  <a href="#" id="logo-scroll-top" class="block w-fit mx-auto mb-[-18px]">
+    <img src="public/assets/logo/logo.png" alt="Maison De Haute Logo" class="h-28 md:h-32 mx-auto filter sepia hue-rotate-[10deg] saturate-[2.5] brightness-95 fade-in" style="animation-delay:0.1s;" />
+  </a>
+
+  <!-- 브랜드명 -->
+  <h2 id="brand" class="text-5xl md:text-8xl font-bold tracking-tight text-[#c9a56d] font-[Playfair Display] fade-in" style="animation-delay:0.3s;">
+    Maison De Haute
+  </h2>
+
+  <!-- 한글 태그라인 -->
+  <p class="text-xl md:text-2xl text-[#d6d6d6] mt-4 font-[Noto Serif KR] fade-in" style="animation-delay:0.5s;">
+    메종 드 오뜨 | 신뢰의 명품 병행 수입 브랜드
+  </p>
+
+  <!-- 슬로건 문구 -->
+  <p class="text-xl md:text-2xl mt-10 italic text-[#e4cbb0] font-[Noto Serif KR] fade-in" style="animation-delay:0.7s;">
+    <span class="italic">"패션은 사라지지만"</span>, <span class="not-italic">스타일은 영원하다."</span>
+  </p>
+
+  <!-- 출처 -->
+  <p class="mt-2 text-sm text-[#999999] fade-in" style="animation-delay:0.9s;">- 가브리엘 샤넬 -</p>
+</section>
+
+<!-- Trust History Section (with animation) -->
+<section id="system" class="py-24 px-6 bg-[#1a1a1a] text-center scroll-mt-[100px]">
+  <div class="mb-12 transition-all duration-700 ease-in-out transform hover:scale-105">
+    <h2 id="system" class="text-3xl font-semibold text-white">20년 이상의 업력</h2>
+    <p class="text-lg text-gray-300 mt-2">오랜 시간 동안 고객과 함께 쌓아온 신뢰의 결과입니다</p>
+  </div>
+  <div class="flex flex-col md:flex-row justify-center gap-16">
+    <div class="flex flex-col items-center bg-[#2a2a2a] px-8 py-6 rounded-lg shadow-md hover:shadow-xl transition group hover:scale-[1.02] duration-300 ease-in-out">
+      <p class="text-5xl font-extrabold text-[#c9b37e] mb-2">20+</p>
+      <p class="text-base text-gray-300 font-medium">축적된 노하우와<br /><span class="whitespace-nowrap">신뢰 기반의 경험</span></p>
+    </div>
+    <div class="flex flex-col items-center bg-[#2a2a2a] px-8 py-6 rounded-lg shadow-md hover:shadow-xl transition group hover:scale-[1.02] duration-300 ease-in-out">
+      <p class="text-5xl font-extrabold text-[#c9b37e] mb-2">99%</p>
+      <p class="text-base text-gray-300 font-medium">고객이 인정한<br /><span class="whitespace-nowrap">만족도</span></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- Three Pillars of Trust -->
+<section id="trust-system" class="py-24 px-6 bg-[#1e1e1e] scroll-mt-[160px]">
+  <h2 class="text-3xl font-semibold text-center mb-16 tracking-wide text-gray-100">메종 드 오뜨의 3대 신뢰 시스템</h2>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-12 gap-y-20">
+
+    <!-- 품질 퀄리티 -->
+    <div class="p-8 bg-[#252525] rounded-xl shadow-md hover:shadow-xl transition group flex flex-col gap-6 hover:scale-[1.02] duration-300 ease-in-out text-center">
+      <div class="flex justify-center mb-2">
+        <div class="w-16 h-16 bg-gradient-to-br from-[#c9b37e] to-[#a68b3e] rounded-full flex items-center justify-center grayscale group-hover:grayscale-0 transition-all">
+          <span class="text-white font-semibold text-[9px] tracking-tight">GUARANTEE</span>
+        </div>
+      </div>
+      <h3 class="text-xl font-semibold text-white tracking-tight">완벽한 제품 퀄리티</h3>
+      <p class="text-gray-400 leading-relaxed text-sm">
+        모든 제품은 자체 2중 검수 시스템을 거쳐<br />
+        품질을 세밀하게 확인한 뒤,<br />
+        최종 양품만을 고객님께 안전하게 발송합니다.
+      </p>
+    </div>
+
+    <!-- 통관 보장 -->
+    <div class="p-8 bg-[#252525] rounded-xl shadow-md hover:shadow-xl transition group flex flex-col gap-6 hover:scale-[1.02] duration-300 ease-in-out text-center">
+      <div class="flex justify-center mb-2">
+        <div class="w-16 h-16 bg-gradient-to-tr from-[#305D9A] to-[#7DA9D7] rounded-lg flex flex-col items-center justify-center text-white text-[10px] font-medium grayscale group-hover:grayscale-0 transition-all">
+          <div class="text-lg mb-[1px]">🧾</div>
+          <span>통관 보장</span>
+        </div>
+      </div>
+      <h3 class="text-xl font-semibold text-white tracking-tight">통관 책임 보장</h3>
+      <p class="text-gray-400 leading-relaxed text-sm">
+        세관에서 발생할 수 있는 모든 리스크는<br />
+        메종 드 오뜨가 전적으로 책임지며,<br />
+        고객님은 오직 기다림 외의 어떤 부담도 없습니다.
+      </p>
+    </div>
+
+    <!-- A/S망 구축 -->
+    <div class="p-8 bg-[#252525] rounded-xl shadow-md hover:shadow-xl transition group flex flex-col gap-6 hover:scale-[1.02] duration-300 ease-in-out text-center">
+      <div class="flex justify-center mb-2">
+        <div class="w-16 h-16 bg-gradient-to-br from-[#a6a6a6] to-[#dcdcdc] rounded-full flex flex-col items-center justify-center text-gray-800 text-[10px] font-medium grayscale group-hover:grayscale-0 transition-all">
+          <div class="text-lg mb-[1px]">🧵👜</div>
+          <span>A/S</span>
+        </div>
+      </div>
+      <h3 class="text-xl font-semibold text-white tracking-tight">국내 A/S망 구축</h3>
+      <p class="text-gray-400 leading-relaxed text-sm">
+        에르메스를 포함한 고급 브랜드 수선이<br />
+        가능한 국내 유수의 제휴 업체들과 협력하여,<br />
+        만족도 높은 사후 서비스를 제공하고 있습니다.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Featured Brands -->
+<section id="brands" class="bg-[#121212] py-24 px-6 text-white scroll-mt-[160px]">
+  <h2 class="text-center text-3xl md:text-4xl font-serif text-[#f5f5f5] mb-16 tracking-wide">대표 브랜드</h2>
+  
+  <!-- Brand section container with luxury border -->
+  <div class="relative max-w-7xl mx-auto p-12 rounded-2xl bg-gradient-to-b from-[#181818] via-[#161616] to-[#141414] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_20px_40px_-20px_rgba(0,0,0,0.7)] backdrop-blur-sm group transition-all duration-700 hover:translate-y-[-8px]">
+    <!-- Outer decorative border with gradient -->
+    <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#c9a56d]/20 via-[#c9a56d]/10 to-transparent opacity-75 group-hover:opacity-100 group-hover:from-[#c9a56d]/40 group-hover:via-[#c9a56d]/20 transition-all duration-700"></div>
+    
+    <!-- Inner content border with enhanced depth -->
+    <div class="absolute inset-[2px] rounded-2xl border border-[#c9a56d]/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)] group-hover:border-[#c9a56d]/30 group-hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-700"></div>
+    
+    <!-- Decorative corner borders with enhanced design -->
+    <div class="absolute top-0 left-0 w-24 h-24 group-hover:w-32 group-hover:h-32 transition-all duration-700">
+      <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#c9a56d]/80 to-transparent group-hover:from-[#c9a56d] group-hover:to-[#c9a56d]/20 group-hover:shadow-[0_0_10px_rgba(201,165,109,0.5)] transition-all duration-700"></div>
+      <div class="absolute top-0 left-0 h-full w-[2px] bg-gradient-to-b from-[#c9a56d]/80 to-transparent group-hover:from-[#c9a56d] group-hover:to-[#c9a56d]/20 group-hover:shadow-[-0_0_10px_rgba(201,165,109,0.5)] transition-all duration-700"></div>
+    </div>
+    <div class="absolute top-0 right-0 w-24 h-24 group-hover:w-32 group-hover:h-32 transition-all duration-700">
+      <div class="absolute top-0 right-0 w-full h-[2px] bg-gradient-to-l from-[#c9a56d]/80 to-transparent group-hover:from-[#c9a56d] group-hover:to-[#c9a56d]/20 group-hover:shadow-[0_0_10px_rgba(201,165,109,0.5)] transition-all duration-700"></div>
+      <div class="absolute top-0 right-0 h-full w-[2px] bg-gradient-to-b from-[#c9a56d]/80 to-transparent group-hover:from-[#c9a56d] group-hover:to-[#c9a56d]/20 group-hover:shadow-[0_0_10px_rgba(201,165,109,0.5)] transition-all duration-700"></div>
+    </div>
+    <div class="absolute bottom-0 left-0 w-24 h-24 group-hover:w-32 group-hover:h-32 transition-all duration-700">
+      <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#c9a56d]/80 to-transparent group-hover:from-[#c9a56d] group-hover:to-[#c9a56d]/20 group-hover:shadow-[0_0_10px_rgba(201,165,109,0.5)] transition-all duration-700"></div>
+      <div class="absolute bottom-0 left-0 h-full w-[2px] bg-gradient-to-t from-[#c9a56d]/80 to-transparent group-hover:from-[#c9a56d] group-hover:to-[#c9a56d]/20 group-hover:shadow-[-0_0_10px_rgba(201,165,109,0.5)] transition-all duration-700"></div>
+    </div>
+    <div class="absolute bottom-0 right-0 w-24 h-24 group-hover:w-32 group-hover:h-32 transition-all duration-700">
+      <div class="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-l from-[#c9a56d]/80 to-transparent group-hover:from-[#c9a56d] group-hover:to-[#c9a56d]/20 group-hover:shadow-[0_0_10px_rgba(201,165,109,0.5)] transition-all duration-700"></div>
+      <div class="absolute bottom-0 right-0 h-full w-[2px] bg-gradient-to-t from-[#c9a56d]/80 to-transparent group-hover:from-[#c9a56d] group-hover:to-[#c9a56d]/20 group-hover:shadow-[0_0_10px_rgba(201,165,109,0.5)] transition-all duration-700"></div>
+    </div>
+
+    <!-- Decorative lines with enhanced visibility -->
+    <div class="absolute top-[2px] left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-[#c9a56d]/40 to-transparent group-hover:via-[#c9a56d] group-hover:w-48 group-hover:shadow-[0_0_10px_rgba(201,165,109,0.5)] transition-all duration-700"></div>
+    <div class="absolute bottom-[2px] left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-[#c9a56d]/40 to-transparent group-hover:via-[#c9a56d] group-hover:w-48 group-hover:shadow-[0_0_10px_rgba(201,165,109,0.5)] transition-all duration-700"></div>
+
+    <!-- Content container with relative positioning -->
+    <div class="relative">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-12 gap-y-20">
+        <!-- First row container -->
+        <div class="col-span-full grid grid-cols-3 items-end gap-x-12">
+          <!-- Hermès -->
+          <div class="group/card flex flex-col items-center transition-all duration-700 hover:scale-[1.05]">
+            <div class="relative p-6 h-[116px] rounded-xl bg-[#1e1a17]/95 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-700 group-hover/card:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_8px_32px_rgba(201,165,109,0.3)] group-hover/card:border-[#c7aa72]/30 border border-[#ffffff05] flex items-center justify-center overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-t before:from-[#c7aa72]/0 before:to-transparent before:opacity-0 group-hover/card:before:opacity-100 before:transition-opacity before:duration-700">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,165,109,0)_0%,rgba(201,165,109,0.15)_100%)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"></div>
+              <img src="public/assets/brands/Hermes.png" alt="Hermès" class="h-[132px] object-contain brightness-[1.2] contrast-[1.1] saturate-[0.85] hue-rotate-[355deg] transition-all duration-700 group-hover/card:brightness-125 relative z-10" />
+            </div>
+            <span class="mt-4 text-sm text-[#e86c13]">Hermès</span>
+          </div>
+
+          <!-- Chanel -->
+          <div class="group/card flex flex-col items-center transition-all duration-700 hover:scale-[1.05]">
+            <div class="relative p-6 h-[116px] rounded-xl bg-[#1e1a17]/95 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-700 group-hover/card:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_8px_32px_rgba(201,165,109,0.3)] group-hover/card:border-[#c7aa72]/30 border border-[#ffffff05] flex items-center justify-center overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-t before:from-[#c7aa72]/0 before:to-transparent before:opacity-0 group-hover/card:before:opacity-100 before:transition-opacity before:duration-700">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,165,109,0)_0%,rgba(201,165,109,0.15)_100%)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"></div>
+              <img src="public/assets/brands/Chanel.png" alt="Chanel" class="h-[132px] object-contain brightness-[10] contrast-[0.8] saturate-[0] transition-all duration-700 group-hover/card:brightness-125 relative z-10" />
+            </div>
+            <span class="mt-4 text-sm text-white">Chanel</span>
+          </div>
+
+          <!-- Dior -->
+          <div class="group/card flex flex-col items-center transition-all duration-700 hover:scale-[1.05]">
+            <div class="relative p-6 h-[116px] rounded-xl bg-[#1e1a17]/95 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-700 group-hover/card:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_8px_32px_rgba(201,165,109,0.3)] group-hover/card:border-[#c7aa72]/30 border border-[#ffffff05] flex items-center justify-center overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-t before:from-[#c7aa72]/0 before:to-transparent before:opacity-0 group-hover/card:before:opacity-100 before:transition-opacity before:duration-700">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,165,109,0)_0%,rgba(201,165,109,0.15)_100%)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"></div>
+              <img src="public/assets/brands/Dior_Logo.svg.png" alt="Dior" class="h-[66px] object-contain brightness-[2] contrast-[1.1] saturate-[0] filter invert transition-all duration-700 group-hover/card:brightness-125 relative z-10" />
+            </div>
+            <span class="mt-4 text-sm text-[#d6d6d6]">Dior</span>
+          </div>
+        </div>
+
+        <!-- Middle row -->
+        <div class="group/card flex flex-col items-center transition-all duration-700 hover:scale-[1.05]">
+          <div class="relative p-5 h-[116px] rounded-xl bg-[#1e1a17]/95 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-700 group-hover/card:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_8px_32px_rgba(201,165,109,0.3)] group-hover/card:border-[#c7aa72]/30 border border-[#ffffff05] flex items-center justify-center overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-t before:from-[#c7aa72]/0 before:to-transparent before:opacity-0 group-hover/card:before:opacity-100 before:transition-opacity before:duration-700">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,165,109,0)_0%,rgba(201,165,109,0.15)_100%)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"></div>
+            <img src="public/assets/brands/Loro-Piana-Logo.png" alt="Loro Piana" class="h-[88px] object-contain brightness-[2] contrast-[1.1] saturate-[0] filter invert transition-all duration-700 group-hover/card:brightness-125 relative z-10" />
+          </div>
+          <span class="mt-4 text-sm text-[#735642]">Loro Piana</span>
+        </div>
+
+        <div class="group/card flex flex-col items-center transition-all duration-700 hover:scale-[1.05]">
+          <div class="relative p-5 h-[116px] rounded-xl bg-[#1e1a17]/95 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-700 group-hover/card:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_8px_32px_rgba(201,165,109,0.3)] group-hover/card:border-[#c7aa72]/30 border border-[#ffffff05] flex items-center justify-center overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-t before:from-[#c7aa72]/0 before:to-transparent before:opacity-0 group-hover/card:before:opacity-100 before:transition-opacity before:duration-700">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,165,109,0)_0%,rgba(201,165,109,0.15)_100%)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"></div>
+            <img src="public/assets/brands/Rolex.png" alt="Rolex" class="h-[88px] object-contain brightness-[1.2] contrast-[1.1] saturate-[0.8] hue-rotate-[350deg] transition-all duration-700 group-hover/card:brightness-125 relative z-10" />
+          </div>
+          <span class="mt-4 text-sm text-[#0b6831]">Rolex</span>
+        </div>
+
+        <div class="group/card flex flex-col items-center transition-all duration-700 hover:scale-[1.05]">
+          <div class="relative p-5 h-[116px] rounded-xl bg-[#1e1a17]/95 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-700 group-hover/card:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_8px_32px_rgba(201,165,109,0.3)] group-hover/card:border-[#c7aa72]/30 border border-[#ffffff05] flex items-center justify-center overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-t before:from-[#c7aa72]/0 before:to-transparent before:opacity-0 group-hover/card:before:opacity-100 before:transition-opacity before:duration-700">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,165,109,0)_0%,rgba(201,165,109,0.15)_100%)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"></div>
+            <img src="public/assets/brands/Cartier.png" alt="Cartier" class="h-[132px] object-contain brightness-[1.2] contrast-[1.1] saturate-[0.9] hue-rotate-[340deg] sepia-[0.3] transition-all duration-700 group-hover/card:brightness-125 relative z-10" />
+          </div>
+          <span class="mt-4 text-sm text-[#8b1c3f] italic">Cartier</span>
+        </div>
+
+        <!-- Last row container -->
+        <div class="col-span-full grid grid-cols-3 items-end gap-x-12">
+          <!-- CELINE -->
+          <div class="group/card flex flex-col items-center transition-all duration-700 hover:scale-[1.05]">
+            <div class="relative p-5 h-[110px] rounded-xl bg-[#1e1a17]/95 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-700 group-hover/card:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_8px_32px_rgba(201,165,109,0.3)] group-hover/card:border-[#c7aa72]/30 border border-[#ffffff05] flex items-center justify-center overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-t before:from-[#c7aa72]/0 before:to-transparent before:opacity-0 group-hover/card:before:opacity-100 before:transition-opacity before:duration-700">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,165,109,0)_0%,rgba(201,165,109,0.15)_100%)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"></div>
+              <img src="public/assets/brands/Celine-Logo-1973.png" alt="CELINE" class="h-[88px] object-contain brightness-[2] contrast-[1.1] saturate-[0] filter invert transition-all duration-700 group-hover/card:brightness-125 relative z-10" />
+            </div>
+            <span class="mt-4 text-sm text-white">CELINE</span>
+          </div>
+
+          <!-- Moncler -->
+          <div class="group/card flex flex-col items-center transition-all duration-700 hover:scale-[1.05]">
+            <div class="relative p-5 h-[110px] rounded-xl bg-[#1e1a17]/95 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-700 group-hover/card:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_8px_32px_rgba(201,165,109,0.3)] group-hover/card:border-[#c7aa72]/30 border border-[#ffffff05] flex items-center justify-center overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-t before:from-[#c7aa72]/0 before:to-transparent before:opacity-0 group-hover/card:before:opacity-100 before:transition-opacity before:duration-700">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,165,109,0)_0%,rgba(201,165,109,0.15)_100%)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"></div>
+              <img src="public/assets/brands/moncler-logo.png" alt="Moncler" class="h-[154px] object-contain brightness-[2] contrast-[1.1] saturate-[0] filter invert transition-all duration-700 group-hover/card:brightness-125 relative z-10" />
+            </div>
+            <span class="mt-4 text-sm text-[#d5d5d5]">
+              MO<span class="text-red-500">N</span><span class="text-blue-500">C</span>LER
+            </span>
+          </div>
+
+          <!-- Thom Browne -->
+          <div class="group/card flex flex-col items-center transition-all duration-700 hover:scale-[1.05]">
+            <div class="relative p-5 h-[110px] rounded-xl bg-[#1e1a17]/95 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-700 group-hover/card:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_8px_32px_rgba(201,165,109,0.3)] group-hover/card:border-[#c7aa72]/30 border border-[#ffffff05] flex items-center justify-center overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-t before:from-[#c7aa72]/0 before:to-transparent before:opacity-0 group-hover/card:before:opacity-100 before:transition-opacity before:duration-700">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,165,109,0)_0%,rgba(201,165,109,0.15)_100%)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"></div>
+              <img src="public/assets/brands/thom-browne-logo-freelogovectors.net.svg" alt="Thom Browne" class="h-[66px] object-contain brightness-[2] contrast-[1.1] saturate-[0] filter invert transition-all duration-700 group-hover/card:brightness-125 relative z-10" />
+            </div>
+            <span class="mt-4 text-sm">
+              <span class="text-[#002b5b]">THOM </span><span class="text-[#c1121f]">BROWNE</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Customer Reviews -->
+<section id="review" class="hidden py-24 px-6 bg-[#121212] scroll-mt-[100px]">
+  <h2 id="review" class="text-3xl font-semibold text-center mb-12">고객 후기</h2>
+  <div class="max-w-2xl mx-auto text-center italic text-gray-400 text-lg">
+    "Maison De Haute를 통해 수입한 에르메스 백은 검수부터 배송까지 완벽했습니다. 통관도 걱정 없이 순조로웠고, A/S 안내까지 친절해서 신뢰가 갑니다."
+  </div>
+  <p class="text-center mt-6 text-sm text-gray-500">- 실제 고객 후기 중에서</p>
+</section>
+
+<!-- Journal & Showroom Section -->
+<div class="bg-[#121212] text-[#d6d6d6] px-6 py-16">
+  <!-- 메종 저널 섹션 -->
+  <section id="journal" class="max-w-7xl mx-auto scroll-mt-[120px] pt-8">
+    <h2 class="text-4xl md:text-5xl font-serif mb-10 text-[#c9a56d]">Maison Journal</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Instagram -->
+      <div class="bg-[#1e1e1e] p-6 rounded-xl border border-transparent hover:border-[#c9a56d] transition group">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-8 h-8 rounded-full bg-[#1e1e1e] flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 stroke-[#e4cbb0] group-hover:stroke-[#c9a56d] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="20" x="2" y="2" rx="5" />
+              <circle cx="12" cy="12" r="3.5" />
+              <circle cx="17.5" cy="6.5" r="1.5" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-2xl font-semibold text-[#e4cbb0] group-hover:text-[#c9a56d] transition-colors">Instagram</p>
+            <p class="text-sm text-gray-400">실제 발송 되는 제품들의 검수 영상을 보실 수 있는 공간</p>
+          </div>
+        </div>
+        <a href="#" onclick="openSocialLink('instagram', 'maison_de_haute'); return false;" class="inline-block px-4 py-2 border border-[#c9a56d] text-[#c9a56d] rounded-md text-sm hover:bg-[#c9a56d] hover:text-black transition">바로가기</a>
+      </div>
+      <!-- YouTube -->
+      <div class="bg-[#1e1e1e] p-6 rounded-xl border border-transparent hover:border-[#c9a56d] transition group">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-8 h-8 rounded-full bg-[#1e1e1e] flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#e4cbb0] group-hover:text-[#c9a56d] transition-colors" viewBox="0 0 24 24" fill="currentColor">
+              <rect width="24" height="24" fill="none" />
+              <path d="M21.8 8.001a2.752 2.752 0 0 0-1.936-1.946C18.003 5.5 12 5.5 12 5.5s-6.003 0-7.864.555A2.752 2.752 0 0 0 2.2 8.001C1.5 9.86 1.5 12 1.5 12s0 2.14.7 3.999a2.752 2.752 0 0 0 1.936 1.946C5.997 18.5 12 18.5 12 18.5s6.003 0 7.864-.555a2.752 2.752 0 0 0 1.936-1.946C22.5 14.14 22.5 12 22.5 12s0-2.14-.7-3.999zM10.5 15.5v-7l6 3.5-6 3.5z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-2xl font-semibold text-[#e4cbb0] group-hover:text-[#c9a56d] transition-colors">YouTube</p>
+            <p class="text-sm text-gray-400">실 제품들의 검수 영상과 리뷰를 보실 수 있는 채널</p>
+          </div>
+        </div>
+        <a href="#" onclick="openSocialLink('youtube', 'maison_de_haute'); return false;" class="inline-block px-4 py-2 border border-[#c9a56d] text-[#c9a56d] rounded-md text-sm hover:bg-[#c9a56d] hover:text-black transition">영상 보기</a>
+      </div>
+      <!-- 네이버 블로그 (멤버쉽) -->
+      <div class="bg-[#1e1e1e] p-6 rounded-xl border border-transparent hover:border-[#c9a56d] transition group">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-8 h-8 rounded-full bg-[#1e1e1e] flex items-center justify-center">
+            <svg class="w-5 h-5 stroke-[#e4cbb0] group-hover:stroke-[#c9a56d] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+          </div>
+          <div>
+            <p class="text-2xl font-semibold text-[#e4cbb0] group-hover:text-[#c9a56d] transition-colors">Naver Blog(Membership)</p>
+            <p class="text-sm text-gray-400">회원님들의 전용 공간으로 할인 행사 정보와 제품 리뷰를 보실 수 있는 곳</p>
+          </div>
+        </div>
+        <a href="https://m.blog.naver.com/m_de_h" onclick="if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){this.href='https://m.blog.naver.com/m_de_h'}else{this.href='https://blog.naver.com/m_de_h'}" target="_blank" rel="noopener noreferrer" class="inline-block px-4 py-2 border border-[#c9a56d] text-[#c9a56d] rounded-md text-sm hover:bg-[#c9a56d] hover:text-black transition">블로그 보기</a>
+      </div>
+      <!-- 네이버 블로그 (퍼블릭) -->
+      <div class="bg-[#1e1e1e] p-6 rounded-xl border border-transparent hover:border-[#c9a56d] transition group">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-8 h-8 rounded-full bg-[#1e1e1e] flex items-center justify-center">
+            <svg class="w-5 h-5 stroke-[#e4cbb0] group-hover:stroke-[#c9a56d] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+          </div>
+          <div>
+            <p class="text-2xl font-semibold text-[#e4cbb0] group-hover:text-[#c9a56d] transition-colors">Naver Blog(Public)</p>
+            <p class="text-sm text-gray-400">명품에 관한 이야기를 제인의 시선으로 풀어내는 공간</p>
+          </div>
+        </div>
+        <a href="https://m.blog.naver.com/maison_d_h" onclick="if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){this.href='https://m.blog.naver.com/maison_d_h'}else{this.href='https://blog.naver.com/maison_d_h'}" target="_blank" rel="noopener noreferrer" class="inline-block px-4 py-2 border border-[#c9a56d] text-[#c9a56d] rounded-md text-sm hover:bg-[#c9a56d] hover:text-black transition">정보 보기</a>
+      </div>
+    </div>
+  </section>
+  <!-- 온라인 쇼룸 섹션 -->
+  <section id="showroom" class="max-w-7xl mx-auto mt-24 scroll-mt-[100px]">
+    <h2 id="showroom" class="text-4xl md:text-5xl font-serif mb-10 text-[#c9a56d] scroll-mt-[100px]">Online Showroom</h2>
+    <div class="bg-[#1e1e1e] p-6 rounded-xl border border-transparent hover:border-[#c9a56d] transition group">
+      <div class="flex items-center space-x-3 mb-2">
+        <div class="w-8 h-8 rounded-full bg-[#1e1e1e] flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 stroke-[#e4cbb0] group-hover:stroke-[#c9a56d] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+            <circle cx="9" cy="9" r="2"/>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-2xl font-semibold text-[#e4cbb0] group-hover:text-[#c9a56d] transition-colors">온라인 쇼룸</p>
+          <p class="text-sm text-gray-400">실제 판매된 제품들의 실사와 판매중인 제품을 보실 수 있는 곳</p>
+        </div>
+      </div>
+      <a href="https://a202401231208470442001510.szwego.com/static/index.html#shop_detail/_doqoqQSr52_TqiKcvyv-UGpwynQEQyYRjT0vwiA" onclick="window.open(this.href, '_blank', 'noopener,noreferrer'); return false;" class="inline-block px-4 py-2 border border-[#c9a56d] text-[#c9a56d] rounded-md text-sm hover:bg-[#c9a56d] hover:text-black transition">앨범 보기</a>
+    </div>
+  </section>
+</div>
+
+<!-- CTA Section -->
+<section id="contact" class="py-24 px-6 bg-[#181818] text-center scroll-mt-[100px] relative overflow-hidden">
+  <!-- Background gradient effect -->
+  <div class="absolute inset-0 bg-gradient-to-b from-[#1a1a1a] via-[#181818] to-[#151515] opacity-80"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,165,109,0.03)_0%,rgba(201,165,109,0)_70%)]"></div>
+  
+  <!-- Content container -->
+  <div class="relative max-w-4xl mx-auto space-y-8">
+    <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-white tracking-wide">
+      "소중한 선택이 더 완벽해질 수 있도록"
+    </h2>
+    <div class="space-y-6">
+      <p class="text-xl md:text-2xl text-[#c9a56d] font-medium tracking-wide">
+        최고의 셀러 메종 드 오뜨의 제인이
+      </p>
+      <p class="text-lg text-gray-300">
+        세심하게 함께하겠습니다.
+      </p>
+      <p class="text-gray-400 text-sm mt-4">
+        신속하고 친절한 맞춤 상담을 위해<br/>
+        아래 링크를 통해 편히 말씀 주세요.
+      </p>
+    </div>
+
+    <!-- Buttons container -->
+    <div class="flex flex-col md:flex-row gap-6 justify-center items-center mt-12">
+      <!-- KakaoTalk Button -->
+      <a href="#" onclick="openMessenger('kakao', 's3uuioag'); return false;" 
+         class="group relative flex items-center gap-3 bg-[#FFE812] text-black px-8 py-4 rounded-full hover:bg-[#FFE812]/90 transition-all duration-300">
+        <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0)_70%)]"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 relative z-10">
+          <path d="M12 2C6.201 2 1.5 5.589 1.5 10.021c0 2.385 1.497 4.51 3.89 5.927-.162.547-.882 2.974-.917 3.168 0 0-.018.155.081.214.099.059.225.016.225.016.297-.042 3.441-2.256 3.998-2.646.74.109 1.51.168 2.323.168 5.799 0 10.5-3.589 10.5-8.021S17.799 2 12 2z"/>
+        </svg>
+        <span class="text-lg font-semibold relative z-10">카카오톡 상담</span>
+      </a>
+
+      <!-- Telegram Button -->
+      <a href="#" onclick="openMessenger('telegram', 'mibn5rtsh5oosq'); return false;" 
+         class="group relative flex items-center gap-3 bg-[#229ED9] text-white px-8 py-4 rounded-full hover:bg-[#229ED9]/90 transition-all duration-300">
+        <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0)_70%)]"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 relative z-10">
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm4.93 7.36l-1.6 7.56c-.12.54-.44.67-.89.42l-2.47-1.82-1.19 1.15c-.13.13-.24.24-.5.24l.18-2.53 4.61-4.16c.2-.18-.04-.28-.31-.1l-5.7 3.59-2.45-.77c-.53-.16-.54-.53.11-.78l9.56-3.69c.44-.16.82.1.68.77z"/>
+        </svg>
+        <span class="text-lg font-semibold relative z-10">텔레그램 상담</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Decorative elements -->
+  <div class="absolute left-0 top-1/2 -translate-y-1/2 w-32 h-64 bg-gradient-to-r from-[#c9a56d]/5 to-transparent"></div>
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-64 bg-gradient-to-l from-[#c9a56d]/5 to-transparent"></div>
+</section>
+
+<!-- Footer -->
+<footer class="fixed bottom-0 left-0 w-full bg-[#121212] text-gray-300 text-sm py-4 px-6 md:px-12 border-t border-[#2c2c2c] z-40 backdrop-blur-sm bg-opacity-95">
+  <div class="max-w-7xl mx-auto flex flex-col items-center space-y-3">
+    <!-- 신뢰 문구 -->
+    <div class="text-center">
+      <p class="text-sm text-gray-300 leading-relaxed">
+        <span class="text-[#c9a56d] font-medium">Maison de Haute</span>는 고객과의 신뢰를 가장 우선하며, 정직함과 투명성을 기본으로 합니다.
+      </p>
+    </div>
+
+    <!-- 법적 정보 -->
+    <div class="text-xs text-gray-400 text-center leading-snug">
+      © 2025 Maison de Haute. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+    </div>
+  </main>
+  <script>
+    // fade-in, fade-in-up hover 시 애니메이션 재실행
+    function addReanimateOnHover(selector, animationClass) {
+      document.querySelectorAll(selector).forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          el.classList.remove('re-animate');
+          // 강제로 리플로우를 발생시켜 애니메이션 재적용
+          void el.offsetWidth;
+          el.classList.add('re-animate');
+          el.classList.remove(animationClass);
+          void el.offsetWidth;
+          el.classList.add(animationClass);
+        });
+        el.addEventListener('mouseleave', () => {
+          // 마우스가 나가면 애니메이션 상태를 유지
+          el.classList.remove('re-animate');
+        });
+      });
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      addReanimateOnHover('.fade-in', 'fade-in');
+      addReanimateOnHover('.fade-in-up', 'fade-in-up');
+      // Trust Card: 로딩 시 애니메이션 트리거
+      document.querySelectorAll('.trust-card').forEach(card => {
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 10);
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const logo = document.getElementById('logo-scroll-top');
+      if (logo) {
+        logo.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+
+    // 소셜 미디어 링크 열기 함수
+    function openSocialLink(platform, username) {
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      
+      if (platform === 'instagram') {
+        if (isMobile) {
+          window.location.href = `instagram://user?username=${username}`;
+          setTimeout(() => {
+            window.location.href = `https://www.instagram.com/${username}`;
+          }, 2000);
+        } else {
+          window.open(`https://www.instagram.com/${username}`, '_blank', 'noopener,noreferrer');
+        }
+      } else if (platform === 'youtube') {
+        if (isMobile) {
+          window.location.href = `vnd.youtube://user/${username}`;
+          setTimeout(() => {
+            window.location.href = `https://www.youtube.com/@${username}`;
+          }, 2000);
+        } else {
+          window.open(`https://www.youtube.com/@${username}`, '_blank', 'noopener,noreferrer');
+        }
+      }
+    }
+
+    // 메신저 앱 실행 함수
+    function openMessenger(platform, id) {
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      
+      if (platform === 'kakao') {
+        if (isMobile) {
+          window.location.href = `kakaoopen://join?l=s3uuioag`;
+          setTimeout(() => {
+            window.location.href = `https://open.kakao.com/o/${id}`;
+          }, 2000);
+        } else {
+          window.open(`https://open.kakao.com/o/${id}`, '_blank', 'noopener,noreferrer');
+        }
+      } else if (platform === 'telegram') {
+        if (isMobile) {
+          window.location.href = `tg://resolve?domain=${id}`;
+          setTimeout(() => {
+            window.location.href = `https://t.me/${id}`;
+          }, 2000);
+        } else {
+          window.open(`https://t.me/${id}`, '_blank', 'noopener,noreferrer');
+        }
+      }
+    }
+
+    // Add padding to main content to prevent overlap with fixed footer
+    function updateMainPadding() {
+      const footer = document.querySelector('footer');
+      const main = document.querySelector('main');
+      if (footer && main) {
+        const footerHeight = footer.offsetHeight;
+        main.style.paddingBottom = `${footerHeight + 20}px`; // 20px extra padding
+      }
+    }
+
+    // Update padding on load and resize
+    window.addEventListener('load', updateMainPadding);
+    window.addEventListener('resize', updateMainPadding);
+  </script>
+</body>
+</html>
+
+
